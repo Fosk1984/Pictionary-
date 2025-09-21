@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Radiography Pictionary – Random Word Generator</title>
+  <style>
+    :root{
+      --bg:#0b0d12; --card:#151a22; --text:#e8eef7; --muted:#9fb3c8; --accent:#ffd23f; --accent2:#5eead4;
+      --btn:#1f2937; --btn-hover:#263243; --border:#22324a;
+    }
+    body{margin:0;min-height:100vh;background:linear-gradient(160deg,#0b0d12 0%,#151a22 100%);color:var(--text);font:16px/1.4 system-ui;display:flex;align-items:center;justify-content:center}
+    .wrap{max-width:800px;width:100%;padding:24px;text-align:center}
+    .title{font-size:2.2rem;font-weight:800;margin-bottom:12px;color:var(--accent)}
+    #word{font-size:2.5rem;font-weight:900;margin:32px 0;padding:24px;background:var(--card);border:2px solid var(--border);border-radius:20px;box-shadow:0 4px 16px rgba(0,0,0,0.4);min-height:80px;display:flex;align-items:center;justify-content:center}
+    .buttons{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:16px}
+    button{flex:1;min-width:120px;background:var(--btn);color:var(--text);border:1px solid var(--border);border-radius:12px;padding:12px 18px;font-weight:700;font-size:1rem;cursor:pointer;transition:all 0.2s ease}
+    button:hover{background:var(--btn-hover);transform:translateY(-2px)}
+    button:active{transform:translateY(0)}
+    #btnEasy{background:#2563eb;border:none} #btnEasy:hover{background:#1d4ed8}
+    #btnMedium{background:#16a34a;border:none} #btnMedium:hover{background:#15803d}
+    #btnHard{background:#dc2626;border:none} #btnHard:hover{background:#b91c1c}
+    #btnNext{background:var(--accent);color:#111;border:none;font-size:1.1rem}
+    #btnNext:hover{filter:brightness(.95)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">Radiography Pictionary</div>
+    <div id="word">Click Next to start</div>
+    <div class="buttons">
+      <button id="btnEasy">Easy</button>
+      <button id="btnMedium">Medium</button>
+      <button id="btnHard">Hard</button>
+      <button id="btnNext">Next word</button>
+    </div>
+  </div>
+
+  <script>
+  const RADIOGRAPHY = {
+  easy:[
+    "Colles’ fracture","Smith’s fracture","Greenstick fracture","Scaphoid fracture","Neck of femur fracture","Intertrochanteric fracture","Clavicle fracture","Humeral head fracture","Supracondylar fracture","Patella fracture","Tibial plateau fracture","Fibula fracture","Ankle sprain","Wrist sprain","Shoulder dislocation","Hip dislocation","Finger dislocation","Pneumothorax","Pleural effusion","Pneumonia (consolidation)","Pulmonary oedema","Atelectasis","Cardiomegaly","Osteoarthritis (hip)","Osteoarthritis (knee)","Osteoarthritis (hand)","Rheumatoid arthritis","Osteoporosis","Spinal compression fracture","Scoliosis","Kyphosis","Lordosis","Gallstone","Kidney stone","Bowel obstruction","Free air under diaphragm","Foreign body (coin)","Inhaled object (airway)","NG tube malposition","Central line tip check","Pacemaker check","Hip prosthesis loosening","Knee prosthesis loosening","Dental caries","Periapical abscess","Sinusitis","Tonsillitis","Mastoiditis","Haematoma","Chest infection","Bronchitis","Asthma exacerbation","COPD (emphysema)","Rib fracture","Vertebral wedge fracture","Neonatal pneumothorax","Club foot (talipes)","Babygram (RDS)","Paediatric chest film","Plaster cast on limb"
+  ],
+  medium:[
+    "Boxer’s fracture","Bennett’s fracture","Lisfranc fracture","Monteggia fracture","Galeazzi fracture","Pott’s fracture","Bimalleolar fracture","Trimalleolar fracture","Tibial shaft fracture","Femoral shaft fracture","Distal radius fracture","Ulnar styloid fracture","Shoulder dislocation (posterior)","Supracondylar elbow fracture","Rib metastasis","Lytic bone lesion","Sclerotic bone lesion","Simple bone cyst","Enchondroma","Osteochondroma","Fibrous dysplasia","Osteosarcoma","Ewing’s sarcoma","Chondrosarcoma","Bone metastases","Multiple myeloma","Paget’s disease","Ankylosing spondylitis","Spina bifida occulta","Hydrocephalus","Subdural haematoma","Epidural haematoma","Intracerebral haemorrhage","Ischaemic stroke","Subarachnoid haemorrhage","Intracranial metastasis","Pituitary adenoma","Lung cancer mass","Solitary pulmonary nodule","Mesothelioma","Sarcoidosis","Tuberculosis (pulmonary)","Bronchiectasis","Silicosis","Asbestosis","Cystic fibrosis","Intussusception","Volvulus","Meckel’s diverticulum","Crohn’s disease","Ulcerative colitis","Diverticulitis","Appendicitis","Gallbladder empyema","Pyelonephritis","Septic arthritis","Osteomyelitis","Gouty arthritis","Charcot joint","Osgood-Schlatter disease"
+  ],
+  hard:[
+    "Jefferson fracture (C1)","Hangman’s fracture (C2)","Burst fracture","Chance fracture","Rolando fracture","Hill-Sachs lesion","Bankart lesion","Segond fracture","Tibial spine avulsion","Tillaux fracture","Maisonneuve fracture","Tripod fracture (zygoma)","Le Fort  fracture","Blowout fracture (orbit)","Temporal bone fracture","CSF leak","Carotid dissection","Aortic dissection","Aortic aneurysm rupture","Coarctation of the aorta","Pulmonary embolism","Pericardial effusion","Pneumopericardium","Pneumomediastinum","Hodgkin’s lymphoma","Non-Hodgkin’s lymphoma","Leukaemia changes","Osteomalacia","Rickets","Hyperparathyroidism bone resorption","Hypoparathyroidism calcification","Acromegaly skull","Cushing’s fractures","Addison’s calcification","Wilson’s disease liver","Hepatocellular carcinoma","Pancreatic carcinoma","Perthes disease","Slipped upper femoral epiphysis (SUFE)","Developmental dysplasia of hip (DDH)","Achondroplasia","Marfan’s syndrome","Ehlers-Danlos syndrome","Sickle cell infarct","Thalassaemia","Haemophilia","Arnold-Chiari malformation","Intracranial aneurysm","Arteriovenous malformation (AVM)","Meningioma","Brain metastases","Glioblastoma"
+  ]
+};
+
+  let currentDifficulty = 'easy';
+  let deck = [];
+
+  const els = {
+    word: document.getElementById('word'),
+    btnNext: document.getElementById('btnNext'),
+    btnEasy: document.getElementById('btnEasy'),
+    btnMedium: document.getElementById('btnMedium'),
+    btnHard: document.getElementById('btnHard'),
+  };
+
+  function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a;}
+  function buildDeck(){
+    if(currentDifficulty==='easy') deck=shuffle(RADIOGRAPHY.easy.slice());
+    if(currentDifficulty==='medium') deck=shuffle(RADIOGRAPHY.medium.slice());
+    if(currentDifficulty==='hard') deck=shuffle(RADIOGRAPHY.hard.slice());
+    els.word.textContent='Click Next to start';
+  }
+  function nextWord(){
+    if(deck.length===0){els.word.textContent='Deck finished — choose difficulty to reset.';return;}
+    const w=deck.pop();
+    els.word.textContent=w;
+  }
+  function setDifficulty(d){currentDifficulty=d;buildDeck();}
+
+  els.btnNext.addEventListener('click',nextWord);
+  els.btnEasy.addEventListener('click',()=>setDifficulty('easy'));
+  els.btnMedium.addEventListener('click',()=>setDifficulty('medium'));
+  els.btnHard.addEventListener('click',()=>setDifficulty('hard'));
+
+  document.addEventListener('keydown',(e)=>{
+    if(e.key===' '){e.preventDefault();nextWord();}
+    if(e.key.toLowerCase()==='e'){setDifficulty('easy');}
+    if(e.key.toLowerCase()==='m'){setDifficulty('medium');}
+    if(e.key.toLowerCase()==='h'){setDifficulty('hard');}
+  });
+
+  buildDeck();
+  </script>
+</body>
+</html>
